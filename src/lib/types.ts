@@ -28,6 +28,8 @@ export interface City {
   governorate?: Governorate
 }
 
+export type Language = "en" | "ar" | "fr"
+
 export interface Trip {
   id: string
   passenger_id: string

@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export function Navbar() {
+  const [mounted, setMounted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [user, setUser] = useState<any>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
@@ -25,6 +26,12 @@ export function Navbar() {
   const router = useRouter()
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return // Don't run until mounted
+    
     const getUser = async () => {
       console.log("🔄 Navbar: Starting getUser function")
       try {
@@ -93,7 +100,7 @@ export function Navbar() {
     } catch (error) {
       console.error("❌ Navbar: Error setting up auth listener:", error)
     }
-  }, [])
+  }, [mounted])
 
   const handleLogout = async () => {
     console.log("🔄 Navbar: Starting logout process")
@@ -109,6 +116,24 @@ export function Navbar() {
       console.error("❌ Navbar: Logout exception:", error)
       router.push("/")
     }
+  }
+
+  // Show loading state until mounted
+  if (!mounted) {
+    return (
+      <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:bg-gray-900/95 dark:supports-[backdrop-filter]:bg-gray-900/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <Link href="/" className="flex items-center space-x-2">
+                <Car className="h-8 w-8 text-primary" />
+                <span className="font-bold text-xl">TunisRide</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+    )
   }
 
   return (

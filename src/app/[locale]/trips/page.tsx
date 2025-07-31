@@ -11,8 +11,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useTranslations } from "next-intl"
+import { usePathname } from "@/i18n/navigation"
 import { supabase } from "@/lib/supabase/client"
-import type { Profile, Trip, Governorate, City } from "@/lib/types"
+import type { Profile, Trip, Governorate, City, Language } from "@/lib/types"
 import { getCityName, getGovernorateName, cn } from "@/lib/utils" // Import cn from utils
 import { Command, CommandList, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -34,6 +35,10 @@ export default function TripsPage() {
   })
   const t = useTranslations()
   const router = useRouter()
+  const pathname = usePathname()
+
+  // Extract current locale from pathname
+  const language: Language = pathname.startsWith('/ar') ? 'ar' : pathname.startsWith('/fr') ? 'fr' : 'en'
 
   // State for Combobox open/close
   const [openGovernorate, setOpenGovernorate] = useState(false)
@@ -516,7 +521,7 @@ export default function TripsPage() {
           </Card>
         ) : (
           trips.map((trip) => (
-            <Link key={trip.id} href={`/trips/${trip.id}`}>
+            <Link key={trip.id} href={`/${language}/trips/${trip.id}`}>
               <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-center justify-between">
@@ -575,7 +580,7 @@ export default function TripsPage() {
 
                     <div className="mt-4 md:mt-0 md:ml-6 flex flex-col space-y-2">
                       {profile?.user_type === "driver" && trip.status === "pending" && (
-                        <Link href={`/trips/${trip.id}/accept`}>
+                        <Link href={`/${language}/trips/${trip.id}/accept`}>
                           <Button className="w-full md:w-auto">{t("acceptTrip")}</Button>
                         </Link>
                       )}
