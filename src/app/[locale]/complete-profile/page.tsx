@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useToast } from "@/hooks/use-toast"
-import { useI18n } from "@/lib/i18n"
+import { useTranslations } from "next-intl"
 import { supabase } from "@/lib/supabase/client"
 import { createProfile } from "@/app/actions/profile"
 
@@ -24,7 +24,7 @@ export default function CompleteProfilePage() {
   const [loading, setLoading] = useState(true)
   const [userAuthenticated, setUserAuthenticated] = useState(false)
   const { toast } = useToast()
-  const t = useI18n()
+  const t = useTranslations()
   const router = useRouter()
 
   useEffect(() => {

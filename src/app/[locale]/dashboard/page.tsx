@@ -7,7 +7,7 @@ import { Plus, MapPin, Calendar, DollarSign, Users, Car } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { useLanguage } from "@/lib/language-context"
+import { useTranslations } from "next-intl"
 import { supabase } from "@/lib/supabase/client"
 import type { Profile, Trip } from "@/lib/types"
 import { getCityName } from "@/lib/utils" // Import getCityName from utils
@@ -16,7 +16,7 @@ export default function DashboardPage() {
   const [profile, setProfile] = useState<Profile | null>(null)
   const [trips, setTrips] = useState<Trip[]>([])
   const [loading, setLoading] = useState(true)
-  const { t, language } = useLanguage() // Destructure language from useLanguage
+  const t = useTranslations()
   const router = useRouter()
 
   useEffect(() => {
@@ -256,7 +256,7 @@ export default function DashboardPage() {
                     <div className="flex items-center space-x-2 mb-2">
                       <MapPin className="h-4 w-4 text-muted-foreground" />
                       <span className="font-medium">
-                        {getCityName(trip.from_city, language)} → {getCityName(trip.to_city, language)}
+                        {getCityName(trip.from_city, "en")} → {getCityName(trip.to_city, "en")}
                       </span>
                     </div>
                     <div className="flex items-center space-x-4 text-sm text-muted-foreground">

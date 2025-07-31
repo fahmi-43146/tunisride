@@ -14,8 +14,7 @@ import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
 import { fetchTripsForAdmin, deleteTripAsAdmin } from "@/app/actions/admin-trips" // Import new actions
 import { getCityName } from "@/lib/utils"
-import { useI18n } from "@/lib/i18n"
-import { useLanguage } from "@/lib/language-context"
+import { useTranslations } from "next-intl"
 import { Filter, Trash2, Edit } from "lucide-react" // Import new icons
 
 export default function AdminTripsPage() {
@@ -25,8 +24,7 @@ export default function AdminTripsPage() {
   const [filters, setFilters] = useState({ status: "all" })
   const router = useRouter()
   const { toast } = useToast()
-  const t = useI18n()
-  const { language } = useLanguage()
+  const t = useTranslations()
 
   useEffect(() => {
     const loadTrips = async () => {

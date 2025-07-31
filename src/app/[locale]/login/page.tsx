@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
-import { useLanguage } from "@/lib/language-context"
+import { useTranslations } from "next-intl"
 import { supabase } from "@/lib/supabase/client"
 
 export default function LoginPage() {
@@ -23,7 +23,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [emailNotConfirmed, setEmailNotConfirmed] = useState(false)
   const { toast } = useToast()
-  const { t } = useLanguage()
+  const t = useTranslations()
   const router = useRouter()
   const searchParams = useSearchParams()
 

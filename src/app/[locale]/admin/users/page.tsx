@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch" // Import Switch
 import { useToast } from "@/hooks/use-toast" // Import useToast
 import { fetchUsersForAdmin, toggleUserApproval } from "@/app/actions/admin-users"
-import { useI18n } from "@/lib/i18n" // Import useI18n
+import { useTranslations } from "next-intl"
 
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<Profile[]>([])
@@ -20,7 +20,7 @@ export default function AdminUsersPage() {
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
   const { toast } = useToast() // Initialize toast
-  const t = useI18n() // Initialize useI18n
+  const t = useTranslations()
 
   useEffect(() => {
     const loadUsers = async () => {

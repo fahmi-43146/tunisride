@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { useToast } from "@/hooks/use-toast"
-import { useI18n } from "@/lib/i18n"
+import { useTranslations } from "next-intl"
 import { fetchPlatformSettings, updatePlatformSetting } from "@/app/actions/platform-settings"
 import { SettingsIcon } from "lucide-react" // Renamed to avoid conflict
 
@@ -22,7 +22,7 @@ export default function AdminSettingsPage() {
   const [error, setError] = useState<string | null>(null)
   const [isSaving, setIsSaving] = useState(false)
   const { toast } = useToast()
-  const t = useI18n()
+  const t = useTranslations()
   const router = useRouter()
 
   useEffect(() => {

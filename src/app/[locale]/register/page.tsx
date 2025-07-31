@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
-import { useLanguage } from "@/lib/language-context"
+import { useTranslations } from "next-intl"
 import { registerUser, resendConfirmationEmail } from "@/app/actions/auth"
 
 export default function RegisterPage() {
@@ -28,7 +28,7 @@ export default function RegisterPage() {
   const [registrationComplete, setRegistrationComplete] = useState(false)
   const [resendingEmail, setResendingEmail] = useState(false)
   const { toast } = useToast()
-  const { t } = useLanguage()
+  const t = useTranslations()
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {

@@ -14,7 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
-import { useLanguage } from "@/lib/language-context"
+import { useTranslations } from "next-intl"
 import { supabase } from "@/lib/supabase/client"
 import type { Profile, Governorate, City } from "@/lib/types"
 import { getCityName, getGovernorateName } from "@/lib/utils"
@@ -37,7 +37,7 @@ export default function NewTripPage() {
     notes: "",
   })
   const { toast } = useToast()
-  const { t, language } = useLanguage()
+  const t = useTranslations()
   const router = useRouter()
 
   useEffect(() => {
@@ -299,7 +299,7 @@ export default function NewTripPage() {
                   <SelectContent>
                     {governorates.map((gov) => (
                       <SelectItem key={gov.id} value={gov.id.toString()}>
-                        {getGovernorateName(gov, language)}
+                        {getGovernorateName(gov, "en")}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -321,7 +321,7 @@ export default function NewTripPage() {
                   <SelectContent>
                     {getGovernorateCity(formData.fromGovernorate).map((city) => (
                       <SelectItem key={city.id} value={city.id.toString()}>
-                        {getCityName(city, language)}
+                        {getCityName(city, "en")}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -345,7 +345,7 @@ export default function NewTripPage() {
                   <SelectContent>
                     {governorates.map((gov) => (
                       <SelectItem key={gov.id} value={gov.id.toString()}>
-                        {getGovernorateName(gov, language)}
+                        {getGovernorateName(gov, "en")}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -367,7 +367,7 @@ export default function NewTripPage() {
                   <SelectContent>
                     {getGovernorateCity(formData.toGovernorate).map((city) => (
                       <SelectItem key={city.id} value={city.id.toString()}>
-                        {getCityName(city, language)}
+                        {getCityName(city, "en")}
                       </SelectItem>
                     ))}
                   </SelectContent>

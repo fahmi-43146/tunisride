@@ -1,13 +1,13 @@
 import type React from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getFinancialOverview } from "@/app/actions/admin-finance"
-import { useI18n } from "@/lib/i18n"
+import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { getTotalUsers } from "@/app/actions/admin-users" // Import getTotalUsers function
 
 export default async function AdminFinancePage() {
-  const t = useI18n()
+  const t = useTranslations()
   const financialOverview = await getFinancialOverview()
   const totalUsersResult = await getTotalUsers() // Declare totalUsers variable
 

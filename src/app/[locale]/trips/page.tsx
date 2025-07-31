@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { useLanguage } from "@/lib/language-context"
+import { useTranslations } from "next-intl"
 import { supabase } from "@/lib/supabase/client"
 import type { Profile, Trip, Governorate, City } from "@/lib/types"
 import { getCityName, getGovernorateName, cn } from "@/lib/utils" // Import cn from utils
@@ -32,7 +32,7 @@ export default function TripsPage() {
     maxFare: "",
     date: "",
   })
-  const { t, language } = useLanguage()
+  const t = useTranslations()
   const router = useRouter()
 
   // State for Combobox open/close
@@ -266,14 +266,14 @@ export default function TripsPage() {
                     className="w-full justify-between text-foreground bg-background"
                   >
                     {filters.governorate
-                      ? getGovernorateName(
+                      ?                         getGovernorateName(
                           governorates.find((gov) => gov.id.toString() === filters.governorate) || {
                             id: 0,
                             name_en: "",
                             name_ar: "",
                             name_fr: "",
                           },
-                          language,
+                          "en",
                         )
                       : t("selectGovernorate")}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -300,7 +300,7 @@ export default function TripsPage() {
                         {governorates.map((gov) => (
                           <CommandItem
                             key={gov.id}
-                            value={getGovernorateName(gov, language)}
+                            value={getGovernorateName(gov, "en")}
                             onSelect={() => {
                               setFilters({ ...filters, governorate: gov.id.toString(), fromCity: "", toCity: "" })
                               setOpenGovernorate(false)
@@ -312,7 +312,7 @@ export default function TripsPage() {
                                 filters.governorate === gov.id.toString() ? "opacity-100" : "opacity-0",
                               )}
                             />
-                            {getGovernorateName(gov, language)}
+                            {getGovernorateName(gov, "en")}
                           </CommandItem>
                         ))}
                       </CommandGroup>
@@ -364,7 +364,7 @@ export default function TripsPage() {
                         {(filters.governorate ? getGovernorateCity(filters.governorate) : cities).map((city) => (
                           <CommandItem
                             key={city.id}
-                            value={getCityName(city, language)}
+                            value={getCityName(city, "en")}
                             onSelect={() => {
                               setFilters({ ...filters, fromCity: city.id.toString() })
                               setOpenFromCity(false)
@@ -376,7 +376,7 @@ export default function TripsPage() {
                                 filters.fromCity === city.id.toString() ? "opacity-100" : "opacity-0",
                               )}
                             />
-                            {getCityName(city, language)}
+                            {getCityName(city, "en")}
                           </CommandItem>
                         ))}
                       </CommandGroup>
@@ -428,7 +428,7 @@ export default function TripsPage() {
                         {(filters.governorate ? getGovernorateCity(filters.governorate) : cities).map((city) => (
                           <CommandItem
                             key={city.id}
-                            value={getCityName(city, language)}
+                            value={getCityName(city, "en")}
                             onSelect={() => {
                               setFilters({ ...filters, toCity: city.id.toString() })
                               setOpenToCity(false)
@@ -440,7 +440,7 @@ export default function TripsPage() {
                                 filters.toCity === city.id.toString() ? "opacity-100" : "opacity-0",
                               )}
                             />
-                            {getCityName(city, language)}
+                            {getCityName(city, "en")}
                           </CommandItem>
                         ))}
                       </CommandGroup>
